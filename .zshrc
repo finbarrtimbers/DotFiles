@@ -6,7 +6,6 @@ export TERM=xterm-256color
 # oh-my-zsh config
 unsetopt correct
 
-export ALTERNATE_EDITOR=emacs EDITOR=emacsclient VISUAL=emacsclient
 
 # Emacs Aliases
 alias e="emacsclient -t" 
@@ -51,30 +50,11 @@ export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
 # Use the "Z" script: 
 . `brew --prefix`/Cellar/z/1.8/etc/profile.d/z.sh
 
-# Provides the basis for the mark/jump system
-export MARKPATH=$HOME/.marks
-function jump { 
-    cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
-}
-function mark { 
-    mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
-}
-function unmark { 
-    rm -i "$MARKPATH/$1"
-}
-function marks {
-    \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
-}
+# Add ruby gems to the path 
+export PATH=`brew --prefix ruby`/bin:$PATH
 
-
-function _completemarks {
-  reply=($(ls $MARKPATH))
-}
-
-compctl -K _completemarks jump
-compctl -K _completemarks unmark
-
-
+# Add autocomplete for teamocil 
+compctl -g '~/.teamocil/*(:t:r)' teamocil
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -120,9 +100,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=$PATH:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
-eval "$(rbenv init -)"
 
 # OPAM configuration
 . /Users/fnbr/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
-export PATH=/usr/local/sbin:/Users/fnbr/.opam/system/bin:/Users/fnbr/.rbenv/shims:/usr/local/Cellar/php55/5.5.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
+#export PATH=/usr/local/sbin:/Users/fnbr/.opam/system/bin:/usr/local/Cellar/php55/5.5.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
