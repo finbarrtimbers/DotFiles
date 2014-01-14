@@ -3,12 +3,10 @@ ZSH=$HOME/.oh-my-zsh
 # Add colors 
 export TERM=xterm-256color
 
-tryToStartEmacsDaemon() {
-
-}
-
 # oh-my-zsh config
 unsetopt correct
+
+export ALTERNATE_EDITOR=emacs EDITOR=emacsclient VISUAL=emacsclient
 
 # Emacs Aliases
 alias e="emacsclient -t" 
@@ -34,8 +32,18 @@ alias cm="less /var/mail/fnbr; sudo rm /var/mail/fnbr"
 alias sw="ssh finbarr@dev1.uasuevents.ca"
 alias sa="ssh -i ~/.ssh/awsServer.pem ubuntu@ec2-54-200-8-16.us-west-2.compute.amazonaws.com"
 
+# Helpers
+alias grep='grep --color=auto' # Always highlight grep search term
+alias ping='ping -c 5'      # Pings with 5 packets, not unlimited
 
+# Start new tmux session if one doesn't already exist 
+tmux
 
+# Handy functions 
+killit() {
+    # Kills any process that matches a regexp passed to it
+    ps aux | grep -v "grep" | grep "$@" | awk '{print $2}' | xargs sudo kill
+}
 # Paths
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
