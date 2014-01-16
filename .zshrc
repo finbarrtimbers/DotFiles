@@ -105,3 +105,4 @@ export PATH=$PATH:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbi
 . /Users/fnbr/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 #export PATH=/usr/local/sbin:/Users/fnbr/.opam/system/bin:/usr/local/Cellar/php55/5.5.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
+export PATH=/usr/local/sbin:$PATH
