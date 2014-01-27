@@ -20,6 +20,7 @@ alias sudo='sudo '
 alias ltx="latexmk -pdf -pvc" 
 alias tlmgr="sudo tlmgr"
 alias backup="~/.scripts/backup.sh"
+alias julia="~/Source/julia/julia"
 
 alias matlab="/Applications/MATLAB_R2013a.app/bin/matlab -nodisplay"
 alias R="$(/usr/bin/which R) --no-save"
@@ -43,6 +44,8 @@ killit() {
     # Kills any process that matches a regexp passed to it
     ps aux | grep -v "grep" | grep "$@" | awk '{print $2}' | xargs sudo kill
 }
+
+
 # Paths
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
@@ -55,18 +58,17 @@ export PATH=`brew --prefix ruby`/bin:$PATH
 
 # Add autocomplete for teamocil 
 compctl -g '~/.teamocil/*(:t:r)' teamocil
+
+
+export HISTFILESIZE=10000
+export HISTSIZE=10000
+
 # Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# Install agnoster theme 
+ZSH_THEME="minimal"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
+# Use case-sensitive completion
+CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"

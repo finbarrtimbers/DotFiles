@@ -54,12 +54,11 @@
 ;;Custom hotkeys
 (require' hotkeys)
 
-;; UI Settings
-(require 'ui-settings)
-
 ;; General Settings
 (require 'general-settings)
 
+;; UI Settings
+(require 'ui-settings)
 
 ;-----------;
 ;;; Modes ;;;
@@ -91,10 +90,21 @@
 ;; Haskell mode
 (require 'haskell-settings)
 
+;; R mode
+(require 'r-settings)
+
+
+;; Julia mode
+(require 'julia-settings)
+
+;; Activate hidden-mode-line-mode
+(eval 
+ (hidden-mode-line-mode t))
 
 ;---------------------------------------------------------------------
 ;; Put auto 'custom' changes in a separate file (this is stuff like
 ;; custom-set-faces and custom-set-variables)
-(load 
- (setq custom-file (expand-file-name "settings/custom.el" user-emacs-directory))
- 'noerror)
+;(load 
+; (setq custom-file (expand-file-name "settings/custom.el" user-emacs-directory))
+; 'noerror)
+(put 'upcase-region 'disabled nil)

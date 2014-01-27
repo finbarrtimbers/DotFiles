@@ -17,6 +17,7 @@ brew tap homebrew/dupes
 brew install homebrew/dupes/grep
 brew tap josegonzalez/homebrew-php
 brew tap homebrew/science
+brew tap docmunch/homebrew-pdftk
 
 # Install everything else
 brew install ack git rename tree R vcsh openblas leiningen python emacs watch z ruby 
