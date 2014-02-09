@@ -68,7 +68,7 @@ export HISTSIZE=10000
 ZSH_THEME="minimal"
 
 # Use case-sensitive completion
-CASE_SENSITIVE="true"
+# CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
