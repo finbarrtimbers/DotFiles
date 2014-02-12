@@ -42,7 +42,7 @@
 (require 'request)
 
 ;; Auto complete
-(require 'auto-complete-settings)
+;;(require 'auto-complete-settings)
 
 ;----------------------;
 ;;; Settings         ;;;
@@ -80,6 +80,9 @@
 ;; Clojure mode
 (require 'clojure-settings)
 
+;; Clojure mode
+;;(require 'coffee-settings)
+
 ;; Matlab mode
 (require 'matlab-settings)
 
@@ -98,8 +101,8 @@
 (require 'julia-settings)
 
 ;; Activate hidden-mode-line-mode
-(eval 
- (hidden-mode-line-mode t))
+;;(eval 
+;; (hidden-mode-line-mode t))
 
 ;---------------------------------------------------------------------
 ;; Put auto 'custom' changes in a separate file (this is stuff like
