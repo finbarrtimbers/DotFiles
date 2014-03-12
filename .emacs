@@ -80,11 +80,11 @@
 ;; Clojure mode
 (require 'clojure-settings)
 
-;; Clojure mode
-;;(require 'coffee-settings)
-
 ;; Matlab mode
 (require 'matlab-settings)
+
+;; OCaml mode
+(require 'ocaml-settings)
 
 
 ;; C/C++ mode
@@ -100,14 +100,10 @@
 ;; Julia mode
 (require 'julia-settings)
 
-;; Activate hidden-mode-line-mode
-;;(eval 
-;; (hidden-mode-line-mode t))
-
 ;---------------------------------------------------------------------
 ;; Put auto 'custom' changes in a separate file (this is stuff like
 ;; custom-set-faces and custom-set-variables)
-;(load 
-; (setq custom-file (expand-file-name "settings/custom.el" user-emacs-directory))
-; 'noerror)
-(put 'upcase-region 'disabled nil)
+(load 
+ (setq custom-file (expand-file-name "settings/custom.el" user-emacs-directory))
+ 'noerror)
+;(put 'upcase-region 'disabled nil)

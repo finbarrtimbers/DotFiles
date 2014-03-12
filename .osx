@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+0;95;0c#!/usr/bin/env bash
 
 # ~/.osx — http://mths.be/osx
 
@@ -346,6 +346,9 @@ defaults write com.apple.dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
 defaults write com.apple.dock autohide-time-modifier -float 0
 
+# stop the bouncing 
+defaults write com.apple.dock no-bouncing -bool TRUE
+
 # Enable the 2D Dock
 #defaults write com.apple.dock no-glass -bool true
 
@@ -354,7 +357,7 @@ defaults write com.apple.dock autohide -bool true
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
-
+killall Dock
 # Reset Launchpad
 find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
 

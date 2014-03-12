@@ -33,7 +33,7 @@ alias sw="ssh finbarr@dev1.uasuevents.ca"
 alias sa="ssh -i ~/.ssh/awsServer.pem ubuntu@ec2-54-200-8-16.us-west-2.compute.amazonaws.com"
 
 # Helpers
-alias grep='grep --color=auto' # Always highlight grep search term
+#alias grep='grep --color=auto' # Always highlight grep search term
 alias ping='ping -c 5'      # Pings with 5 packets, not unlimited
 
 # Start new tmux session if one doesn't already exist 
@@ -107,4 +107,5 @@ export PATH=$PATH:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbi
 . /Users/fnbr/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 #export PATH=/usr/local/sbin:/Users/fnbr/.opam/system/bin:/usr/local/Cellar/php55/5.5.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
+export PATH=/Users/fnbr/.cabal/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
