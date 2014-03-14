@@ -48,13 +48,15 @@ killit() {
 
 # Paths
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
-export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
 
 # Use the "Z" script: 
 . `brew --prefix`/Cellar/z/1.8/etc/profile.d/z.sh
 
 # Add ruby gems to the path 
 export PATH=`brew --prefix ruby`/bin:$PATH
+
+# Add Android SDK to the path
+export ANDROID_HOME=/usr/local/opt/android-sdk
 
 # Add autocomplete for teamocil 
 compctl -g '~/.teamocil/*(:t:r)' teamocil
