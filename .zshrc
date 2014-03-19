@@ -25,6 +25,7 @@ alias julia="~/Source/julia/julia"
 alias matlab="/Applications/MATLAB_R2013a.app/bin/matlab -nodisplay"
 alias R="$(/usr/bin/which R) --no-save"
 alias drake="drip -cp /Users/fnbr/dev/data/drake/target/drake.jar drake.core $@ "
+alias t\%="tmux split-window -h -c '$PWD'"
 alias clj="lein exec"
 alias cm="less /var/mail/fnbr; sudo rm /var/mail/fnbr"
 
