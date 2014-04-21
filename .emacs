@@ -42,6 +42,7 @@
 (include-plugin "request")
 (require 'request)
 
+
 ;; Auto complete
 ;;(require 'auto-complete-settings)
 
@@ -74,6 +75,11 @@
 
 ;; Python mode 
 (require 'python-settings)
+
+;; ERC
+(require 'erc)
+(require 'erc-settings)
+
 
 ;; LaTeX and Auctex
 (require 'latex-settings)
