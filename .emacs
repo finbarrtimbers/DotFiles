@@ -80,9 +80,16 @@
 (require 'erc)
 (require 'erc-settings)
 
+;; GoLang
+(require 'go-settings)
+
 
 ;; LaTeX and Auctex
 (require 'latex-settings)
+
+;; Javascript
+(require 'javascript-settings)
+
 
 ;; Clojure mode
 (require 'clojure-settings)
@@ -107,6 +114,7 @@
 ;; Julia mode
 (require 'julia-settings)
 
+
 ;---------------------------------------------------------------------
 ;; Put auto 'custom' changes in a separate file (this is stuff like
 ;; custom-set-faces and custom-set-variables)
@@ -115,3 +123,4 @@
  'noerror)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+(setq-default indent-tabs-mode nil)

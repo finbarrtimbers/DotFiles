@@ -7,3 +7,5 @@
 	user = timbers
 [alias]
 	up = "!git remote update -p; git merge --ff-only @{u}"
+[core]
+	editor = emacsclient -t -a=/\"/\"

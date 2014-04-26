@@ -12,7 +12,8 @@ alias e="emacsclient -t"
 alias ec="emacsclient -c"
 
 # System Variables
-export EDITOR="emacs"
+alias sudo='sudo '
+export EDITOR="/usr/local/bin/emacsclient -t"
 export JAVA_HOME=$(/usr/libexec/java_home)
 
 # System Aliases
