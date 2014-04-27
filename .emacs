@@ -76,10 +76,6 @@
 ;; Python mode 
 (require 'python-settings)
 
-;; ERC
-(require 'erc)
-(require 'erc-settings)
-
 ;; GoLang
 (require 'go-settings)
 
