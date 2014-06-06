@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Make sure we’re using the latest Homebrew
+brew update
+
+# Upgrade any already-installed formulae
+brew upgrade
+
+# Install GNU core utilities (those that come with OS X are outdated)
+brew install coreutils
+echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
+# Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
+brew install findutils bash wget--enable-iri
+
+# Install more recent versions of some OS X tools
+brew tap homebrew/dupes
+brew tap phinze/cask
+brew tap homebrew/versions
+brew install homebrew/dupes/grep
+brew tap josegonzalez/homebrew-php
+brew tap homebrew/science
+brew tap docmunch/homebrew-pdftk
+
+# Install everything else
+brew install ack git rename tree R vcsh leiningen python emacs watch z ruby auctex cask tmux gcc48
+brew cask install quicksilver 
+brew cask install caffeine
+brew cask install spectacle
+brew cask install flux
+
+
+
+# Add homebrew ruby gems to the path
+export PATH=$(brew --prefix ruby)/bin:$PATH
+
+# Remove outdated versions from the cellar
+brew cleanup
