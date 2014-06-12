@@ -15,6 +15,9 @@ alias ec="emacsclient -c"
 # System Variables
 alias sudo='sudo '
 export JAVA_HOME=$(/usr/libexec/java_home)
+# TODO
+# w off: script that turns on/off/cycles wifi 
+# b off: script that turns on/off/cycles bluetooth 
 
 # System Aliases
 alias sudo='sudo '
@@ -32,6 +35,9 @@ alias grep="ggrep"
 if [[ "$TMUX" == "" ]]; then
     tmux new-session 
 fi
+
+# makes opam run
+eval `opam config env`
 
 # Handy functions 
 killit() {
@@ -54,7 +60,6 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 
 # Add autocomplete for teamocil 
 compctl -g '~/.teamocil/*(:t:r)' teamocil
-
 
 export HISTFILESIZE=10000
 export HISTSIZE=10000
