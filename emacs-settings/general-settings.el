@@ -1,5 +1,26 @@
-; truncate lines even in partial-width windows
+; list the packages you want
+(setq package-list '(auto-complete smex go-mode mode-line sws-mode ess-site))
+
+; list the repositories containing them
+(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
+                                                  ("gnu" . "http://elpa.gnu.org/packages/")
+                                                                           ("marmalade" . "http://marmalade-repo.org/packages/")))
+
+; activate all the packages (in particular autoloads)
+(package-initialize)
+
+; fetch the list of packages available
+(unless package-archive-contents
+    (package-refresh-contents))
+
+; install the missing packages
+(dolist (package package-list)
+    (unless (package-installed-p package)
+          (package-install package)))
+
+;truncate lines even in partial-width windows
 (setq truncate-partial-width-windows 1)
+
 
 ; always use spaces, not tabs, when indenting
 (setq-default indent-tabs-mode nil)
@@ -7,7 +28,7 @@
 ; ignore case when searching
 (setq-default case-fold-search 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-;; Cause different layers of parenthese inemacs to be colored differently. 
+;; Cause different layers of parenthese inemacs to be colored differently.
 ;;(require 'rainbow-delimiters)
 ;;(global-rainbow-delimiters-mode)
 
