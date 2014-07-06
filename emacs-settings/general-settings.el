@@ -1,5 +1,6 @@
 ; list the packages you want
-(setq package-list '(auto-complete smex go-mode mode-line sws-mode ess-site))
+(setq package-list '(el-get auto-complete smex go-mode mode-line sws-mode
+                            ess-site popup ir-black-theme))
 
 ; list the repositories containing them
 (setq package-archives '(("elpa" . "http://tromey.com/elpa/")

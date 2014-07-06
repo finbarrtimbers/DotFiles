@@ -2,7 +2,6 @@
 (add-to-list 'load-path "~/.emacs.d/settings")
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
 ;; global config variables
 (setq plugin-path "~/.emacs.d/plugins/")
@@ -19,10 +18,6 @@
 ;; el-get
 (include-plugin "el-get")
 (require 'el-get)
-
-;; Git
-(include-plugin "magit")
-(require 'magit)
 
 
 
