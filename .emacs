@@ -2,7 +2,6 @@
 (add-to-list 'load-path "~/.emacs.d/settings")
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
 ;; global config variables
 (setq plugin-path "~/.emacs.d/plugins/")
@@ -20,6 +19,31 @@
 (include-plugin "el-get")
 (require 'el-get)
 
+<<<<<<< HEAD
+=======
+
+
+;---------------;
+;;; Utilities ;;;
+;---------------;
+
+;; Popup
+(include-elget-plugin "popup")
+(require 'popup)
+
+;; Websocket
+(include-plugin "websocket")
+(require 'websocket)
+
+;; Request
+(include-plugin "request")
+(require 'request)
+
+
+;; Auto complete
+;;(require 'auto-complete-settings)
+
+>>>>>>> 124372d7036178c131c261deb583723024012fff
 ;----------------------;
 ;;; Settings         ;;;
 ;----------------------;
