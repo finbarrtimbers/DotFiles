@@ -9,18 +9,18 @@
   (let ((fill-column (point-max)))
     (fill-paragraph nil)))
 
-
-(defun copy-from-osx ()
-      (shell-command-to-string "pbpaste"))
-
-(defun paste-to-osx (text &optional push)
-  (let ((process-connection-type nil))
+(if (eq system-type 'darwin)
+    (progn
+	(defun copy-from-osx ()
+        	(shell-command-to-string "pbpaste"))
+	(defun paste-to-osx (text &optional push)
+  		(let ((process-connection-type nil))
     (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
       (process-send-string proc text)
       (process-send-eof proc))))
 
 (setq interprogram-cut-function 'paste-to-osx)
-(setq interprogram-paste-function 'copy-from-osx)
+(setq interprogram-paste-function 'copy-from-osx)))
 
 ;; Command to toggle the display of the mode-line as a header
 ;; Careful: you need to deactivate hidden-mode-line-mode
