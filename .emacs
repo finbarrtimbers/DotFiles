@@ -20,32 +20,6 @@
 (include-plugin "el-get")
 (require 'el-get)
 
-;; Git
-(include-plugin "magit")
-(require 'magit)
-
-
-
-;---------------;
-;;; Utilities ;;;
-;---------------;
-
-;; Popup
-(include-elget-plugin "popup")
-(require 'popup)
-
-;; Websocket
-(include-plugin "websocket")
-(require 'websocket)
-
-;; Request
-(include-plugin "request")
-(require 'request)
-
-
-;; Auto complete
-;;(require 'auto-complete-settings)
-
 ;----------------------;
 ;;; Settings         ;;;
 ;----------------------;
