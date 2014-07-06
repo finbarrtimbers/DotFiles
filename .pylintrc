@@ -44,7 +44,8 @@ symbols=no
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
-#disable=
+disable=deprecated-lambda
+    
 
 
 [REPORTS]
@@ -60,7 +61,7 @@ output-format=text
 files-output=no
 
 # Tells whether to display a full report or only the messages
-reports=no
+#reports=no
 
 # Python expression which should return a note less than 10 (10 is the highest
 # note). You have access to the variables errors warning, statement which
@@ -83,8 +84,8 @@ comment=no
 # Required attributes for module, separated by a comma
 required-attributes=
 
-# List of builtins function names that should not be used, separated by a comma
-bad-functions=[map,filter,apply]
+# List of builtins function names that should always be accepted, separated by a comma
+bad-functions=[apply, input, file]
 
 # Good variable names which should always be accepted, separated by a comma
 good-names=i,j,k,ex,Run,_

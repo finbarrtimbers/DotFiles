@@ -73,7 +73,7 @@
 ;; Markdown mode
 (require 'markdown-settings)
 
-;; Python mode 
+;; Python mode
 (require 'python-settings)
 
 ;; Go mode
@@ -109,11 +109,16 @@
 ;; Julia mode
 (require 'julia-settings)
 
+;; Settings for Jade, Stylus
+(require 'web-settings)
+
+;; Writing
+(require 'writing)
 
 ;---------------------------------------------------------------------
 ;; Put auto 'custom' changes in a separate file (this is stuff like
 ;; custom-set-faces and custom-set-variables)
-(load 
+(load
  (setq custom-file (expand-file-name "settings/custom.el" user-emacs-directory))
  'noerror)
 (put 'upcase-region 'disabled nil)

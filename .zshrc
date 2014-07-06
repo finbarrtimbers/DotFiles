@@ -43,7 +43,6 @@ if [[ "$TMUX" == "" ]]; then
 fi
 
 # System Aliases
-alias git=hub
 alias e="emacsclient -t" 
 alias ltx="latexmk -pdf -pvc" 
 alias xltx="latexmk -pdf -pvc -e '\$pdflatex=q/xelatex %O %S/'" 
