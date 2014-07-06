@@ -1,0 +1,2 @@
+
+('provide coffe-settings)
