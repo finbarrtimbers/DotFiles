@@ -52,3 +52,6 @@ alias R="/usr/local/bin/R --no-save"
 
 # vagrant aliases
 alias vs="vagrant ssh"
+
+# OPAM configuration
+. /Users/ft/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

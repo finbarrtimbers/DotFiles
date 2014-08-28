@@ -1,2 +1,2 @@
 #!/bin/bash
-awk -F ',' '{x += $2} END {print x}'
+awk -F ',' '{x += $3} END {print x}'

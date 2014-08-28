@@ -4,8 +4,8 @@
 
 ; list the repositories containing them
 (setq package-archives '(("elpa" . "http://tromey.com/elpa/")
-                                                  ("gnu" . "http://elpa.gnu.org/packages/")
-                                                                           ("marmalade" . "http://marmalade-repo.org/packages/")))
+						 ("gnu" . "http://elpa.gnu.org/packages/")
+						 ("marmalade" . "http://marmalade-repo.org/packages/")))
 
 ; activate all the packages (in particular autoloads)
 (package-initialize)
@@ -56,5 +56,6 @@
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(setq tab-stop-list (number-sequence 4 200 4))
 (setq indent-line-function 'insert-tab)
 (provide 'general-settings)
