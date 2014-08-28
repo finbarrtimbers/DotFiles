@@ -19,6 +19,8 @@
 (include-plugin "el-get")
 (require 'el-get)
 
+<<<<<<< HEAD
+=======
 
 
 ;---------------;
@@ -41,6 +43,7 @@
 ;; Auto complete
 ;;(require 'auto-complete-settings)
 
+>>>>>>> 124372d7036178c131c261deb583723024012fff
 ;----------------------;
 ;;; Settings         ;;;
 ;----------------------;
