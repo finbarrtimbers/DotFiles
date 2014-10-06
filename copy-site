@@ -1,0 +1,16 @@
+#!/bin/sh
+for site in "$@"
+do
+    /usr/bin/wget -P /home/wmembers/ft/ \
+        --recursive \
+        --no-clobber \
+        --page-requisites \
+        --html-extension \
+        --convert-links \
+        --restrict-file-names=windows \
+        --domains $site \
+        --level=10 \
+        $site
+    zip  -r /home/wmembers/ft/$site-$(/bin/date --date="-1 days" +%Y%m%d).zip /home/wmembers/ft/$site/*
+    `/bin/logger "Copied" $site`
+done

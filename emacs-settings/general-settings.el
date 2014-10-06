@@ -28,7 +28,6 @@
 
 ; ignore case when searching
 (setq-default case-fold-search 1)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; Cause different layers of parenthese inemacs to be colored differently.
 ;;(require 'rainbow-delimiters)
 ;;(global-rainbow-delimiters-mode)
@@ -53,7 +52,6 @@
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 (package-initialize)
 
-(define-key global-map (kbd "RET") 'newline-and-indent)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq tab-stop-list (number-sequence 4 200 4))

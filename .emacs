@@ -2,7 +2,9 @@
 (add-to-list 'load-path "~/.emacs.d/settings")
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
+(add-to-list 'load-path "~/.emacs.d/elpa/")
+(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/elpa/ir-black-theme-1.0")
 ;; global config variables
 (setq plugin-path "~/.emacs.d/plugins/")
 (setq elget-path "~/.emacs.d/el-get/")
@@ -19,8 +21,6 @@
 (include-plugin "el-get")
 (require 'el-get)
 
-<<<<<<< HEAD
-=======
 
 
 ;---------------;
@@ -31,19 +31,6 @@
 (include-elget-plugin "popup")
 (require 'popup)
 
-;; Websocket
-(include-plugin "websocket")
-(require 'websocket)
-
-;; Request
-(include-plugin "request")
-(require 'request)
-
-
-;; Auto complete
-;;(require 'auto-complete-settings)
-
->>>>>>> 124372d7036178c131c261deb583723024012fff
 ;----------------------;
 ;;; Settings         ;;;
 ;----------------------;
@@ -107,11 +94,6 @@
 ;; Julia mode
 (require 'julia-settings)
 
-;; Settings for Jade, Stylus
-(require 'web-settings)
-
-;; Writing
-(require 'writing)
 
 ;---------------------------------------------------------------------
 ;; Put auto 'custom' changes in a separate file (this is stuff like

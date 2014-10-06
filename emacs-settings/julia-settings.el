@@ -1,4 +1,2 @@
-(setq inferior-julia-program-name "/path/to/julia/julia-release-basic")
-
-
+(require 'julia-mode)
 (provide 'julia-settings)
