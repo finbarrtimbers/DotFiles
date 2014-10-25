@@ -2,5 +2,3 @@ brew update;
 brew upgrade;
 brew doctor;
 brew cleanup;
-cabal update;
-cabal install cabal-install

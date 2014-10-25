@@ -4,6 +4,8 @@ weasels="many|various|very|fairly|several|extremely\
 |exceedingly|quite|remarkably|few|surprisingly\
 |mostly|largely|huge|tiny|((are|is) a number)\
 |excellent|interestingly|significantly\
+|really|in addition|basically|a lot|((so as|in order) to)\
+|very|additionally|seem|literally\
 |substantially|clearly|vast|relatively|completely|this|however"
  
 wordfile=""

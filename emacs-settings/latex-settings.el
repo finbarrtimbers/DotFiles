@@ -6,7 +6,7 @@
 ;; Math Mode
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-(setq LaTeX-item-indent 4
+(setq LaTeX-item-indent 0
 	  LaTeX-indent-level 4
 	  TeX-PDF-mode t
           )

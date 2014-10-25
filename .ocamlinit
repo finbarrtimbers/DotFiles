@@ -4,7 +4,7 @@
 #require "core.top"
 #require "async";;
 #require "core.syntax"
-#require "cohttp.asyn"
+#require "cohttp.async"
 #require "yojson"
 #require "textwrap"
 open Core.Std
