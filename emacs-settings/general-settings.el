@@ -1,8 +1,6 @@
 ; list the packages you want
 (setq package-list '(auto-complete smex go-mode sws-mode
                             popup ir-black-theme))
-(global-aggressive-indent-mode 1)
-(add-to-list 'aggressive-indent-excluded-modes 'html-mode 'conf-unix-mode)
 ; list the repositories containing them
 (setq package-archives '(("elpa" . "http://tromey.com/elpa/")
 						 ("gnu" . "http://elpa.gnu.org/packages/")
