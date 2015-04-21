@@ -69,6 +69,7 @@
   ;; Remove splash screen
   (setq inhibit-splash-screen t)
   (show-paren-mode 1)
+  (setq-default fill-column 80)
   (setq-default indent-tabs-mode nil)
   (setq x-select-enable-clipboard t
         x-select-enable-primary t

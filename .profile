@@ -9,6 +9,17 @@ export EDITOR="mg"
 export HISTFILESIZE=1000
 export HISTSIZE=1000
 
+# Hadoop settings
+export JAVA_HOME="$(/usr/libexec/java_home)"
+export HADOOP_CLASSPATH=$JAVA_HOME/lib/tools.jar
+export HADOOP_OPTS="${HADOOP_OPTS} -Djava.security.krb5.realm= -Djava.security.krb5.kdc="
+export HADOOP_OPTS="${HADOOP_OPTS} -Djava.security.krb5.conf=/dev/null"
+
+# start tmux if not running
+if [ "$TMUX" = "" ];
+then tmux;
+fi
+
 # Paths
 export PATH=/usr/local/opt/ruby/bin:$PATH
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
@@ -17,15 +28,22 @@ export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
 export PATH=/usr/local/go/bin:$PATH
 export GOPATH=/usr/local/go/
+export PATH=$JAVA_HOME/bin:$PATH
 
 # Start emacs daemon if it's not already running
 export ALTERNATE_EDITOR=""
 
+# get a weird error without this
+unset GREP_OPTIONS
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
+
 # System Aliases
 alias e="emacsclient -t"
+alias diffpdf="diff-pdf"
 alias ltx="latexmk -pdf -pvc"
 alias xltx="latexmk -pdf -pvc -e '\$pdflatex=q/xelatex %O %S/'"
 alias tlmgr="sudo tlmgr"
+alias sudo='sudo '
 alias R="/usr/local/bin/R --no-save"
 alias julia="/Applications/Julia-0.3.0.app/Contents/Resources/julia/bin/julia"
 alias ijulia="ipython notebook --profile julia"

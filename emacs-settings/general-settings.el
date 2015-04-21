@@ -24,7 +24,8 @@
 
 ; always use spaces, not tabs, when indenting
 (setq-default indent-tabs-mode nil)
-
+(setq-default tab-width 4)
+(global-set-key (kbd "C-x C-r") 'sudo-edit)
 ; ignore case when searching
 (setq-default case-fold-search 1)
 ;; Cause different layers of parenthese inemacs to be colored differently.

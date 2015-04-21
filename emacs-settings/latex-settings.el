@@ -1,5 +1,6 @@
-(load "/usr/local/Cellar/auctex/11.87/share/emacs/site-lisp/auctex.el" nil t t)
-(load "/usr/local/Cellar/auctex/11.87/share/emacs/site-lisp/preview-latex.el" nil t t)
+(load "/usr/local/Cellar/auctex/11.88/share/emacs/site-lisp/auctex.el" nil t t)
+(load "/usr/local/Cellar/auctex/11.88/share/emacs/site-lisp/preview-latex.el" nil t t)
+
 ;;Syntax Higlight
 (add-hook 'LaTeX-mode-hook 'turn-on-font-lock)
 
