@@ -6,12 +6,13 @@ from twilio.rest import TwilioRestClient
 def send_text(text):
     # Your Account Sid and Auth Token from twilio.com/user/account
     account_sid = "ACeef6a0ea6dceb539695ad8d28cc841cd"
-    auth_token  = "801427f0ff095d19a5df13618a246bb7"
+    auth_token  = "2a0056cc9ffdadc28f89c1a012f0dcdc"
     client = TwilioRestClient(account_sid, auth_token)
-    
+
     message = client.sms.messages.create(body=text,
-                                         to="+17809538704",    # Replace with your phone number
-                                         from_="+17806281786") # Replace with your Twilio number
+                                         to="+17807298784",    # Replace with your phone number
+                                         from_="+15874000991")
 
 if __name__ == "__main__":
-    send_text("Script is done running")
+    for message in sys.argv[1:]:
+        send_text(message)
