@@ -9,6 +9,16 @@
 ; activate all the packages (in particular autoloads)
 (package-initialize)
 
+; make emacs save your place
+(if (fboundp #'save-place-mode)
+  (save-place-mode +1)
+  (setq-default save-place t))
+
+
+; make yank and kill work with other programs too
+(setq x-select-enable-clipboard t)
+(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+
 ; fetch the list of packages available
 (unless package-archive-contents
     (package-refresh-contents))
@@ -21,6 +31,10 @@
 ;truncate lines even in partial-width windows
 (setq truncate-partial-width-windows 1)
 
+
+;; kill whitespace before we save
+;; See: http://batsov.com/articles/2011/11/25/emacs-tip-number-3-whitespace-cleanup/
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 ; always use spaces, not tabs, when indenting
 (setq-default indent-tabs-mode nil)
