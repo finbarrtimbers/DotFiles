@@ -33,7 +33,7 @@ prompt_pure_preexec() {
     cmd_timestamp=$EPOCHSECONDS
 }
 
-vcs_status() {
+prompt_info() {
     if [[ ( $(whence in_svn) != "" ) && ( $(in_svn) == 1 ) ]]; then
         svn_prompt_info
     else
@@ -54,8 +54,7 @@ prompt_setup() {
 
     add-zsh-hook precmd prompt_pure_precmd
     add-zsh-hook preexec prompt_pure_preexec
-
-    PROMPT='%2~ $(vcs_status)%(?.%F{green}.%F{red})❯%f '
+    PROMPT='$(prompt_info) %{%(?.%F{green}.%F{red})%G❯%f%} '
 }
 
 prompt_setup
