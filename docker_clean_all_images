@@ -1,2 +1,0 @@
-#!/bin/sh
-docker images -a | sed '1 d' | awk '{print $3}' | xargs -L1 docker rmi -f
