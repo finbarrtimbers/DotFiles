@@ -1,2 +1,0 @@
-#!/bin/sh
-docker ps -a | sed '1 d' | awk '{print $1}' | xargs -L1 docker rm

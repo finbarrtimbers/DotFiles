@@ -1,106 +1,46 @@
-;; path where settings files are kept
-(add-to-list 'load-path "~/.emacs.d/settings")
-(add-to-list 'load-path "~/.emacs.d/plugins")
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(add-to-list 'load-path "~/.emacs.d/elpa/")
-(add-to-list 'load-path "~/.emacs.d/")
-(add-to-list 'load-path "~/.emacs.d/elpa/ir-black-theme-1.0")
-;; global config variables
-(setq plugin-path "~/.emacs.d/plugins/")
-(setq elget-path "~/.emacs.d/el-get/")
+(require 'package)
+; list the packages you want
+(setq package-list '(auto-complete))
 
-;; various generic/global config
-(require 'custom-functions)
-(require 'general-settings)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
 
-;----------------------;
-;;; Standalone tools ;;;
-;----------------------;
+; activate all the packages (in particular autoloads)
+(package-initialize)
 
-;; el-get
-(include-plugin "el-get")
-(require 'el-get)
+; fetch the list of packages available 
+(unless package-archive-contents
+  (package-refresh-contents))
 
+; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 
+;; autocomplete
+(ac-config-default)
 
-;---------------;
-;;; Utilities ;;;
-;---------------;
+;; Enable incremental minibuffer completion.
+(icomplete-mode 1)
 
-;; Popup
-(include-elget-plugin "popup")
-(require 'popup)
-
-;----------------------;
-;;; Settings         ;;;
-;----------------------;
-
-;;Better defaults
-(require' better-defaults)
-
-;;Custom hotkeys
-(require' hotkeys)
-
-;; General Settings
-(require 'general-settings)
-
-;; UI Settings
-(require 'ui-settings)
-
-;-----------;
-;;; Modes ;;;
-;-----------;
-
-;; Ido mode
-(require 'ido)
-(ido-mode 1)
-
-;; Markdown mode
-(require 'markdown-settings)
-
-;; Python mode
-(require 'python-settings)
-
-;; Go mode
-(require 'go-settings)
-
-;; LaTeX and Auctex
-(require 'latex-settings)
-
-;; Javascript
-;;(require 'javascript-settings)
+;; custom keybindings
+(global-set-key (kbd "C-x C-g") 'goto-line)
 
 
-;; Clojure mode
-(require 'clojure-settings)
+;; python settings
+(add-hook 'python-mode-hook 'format-all-mode)
 
-;; Matlab mode
-(require 'matlab-settings)
-
-;; OCaml mode
-(require 'ocaml-settings)
-
-
-;; C/C++ mode
-(require 'c-settings)
-
-;; Haskell mode
-(require 'haskell-settings)
-
-;; R mode
-(require 'r-settings)
-
-
-;; Julia mode
-(require 'julia-settings)
-
-
-;---------------------------------------------------------------------
-;; Put auto 'custom' changes in a separate file (this is stuff like
-;; custom-set-faces and custom-set-variables)
-(load
- (setq custom-file (expand-file-name "settings/custom.el" user-emacs-directory))
- 'noerror)
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-(setq-default indent-tabs-mode nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(format-all auto-complete markdown-mode)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
