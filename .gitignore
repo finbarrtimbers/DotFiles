@@ -1,4 +1,5 @@
 *.elc
 *.el~
+elpa/*
 scripts/node_modules/
 scripts/node_modules/*
