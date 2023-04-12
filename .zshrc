@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
+
 # Improves startup time
 skip_global_compinit=1
 # Set name of the theme to load.
@@ -19,6 +20,21 @@ autoload -U compinit && compinit
 zstyle ':completion:*' users root $USER
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
+
+resize() {
+    # $1 is the filename
+    # $2 is the size, as a percent
+    filename=$1
+    basename=${filename%.png}
+    newname=$basename-full.png
+    if ! [ -f $newname ]; then
+	cp $1 $newname
+    fi
+    #convert $newname -adaptive-resize "$2"% -normalize -density 180 $1
+    #convert $newname -adaptive-resize "$2"% -normalize -unsharp 0.25x0.25+8+0.065 -density 600 $1
+    echo "convert $newname -resize "$2"% -quality 100 $1"
+    convert $newname -quality 100 -resize "$2"% $1
+}
 
 # Speeds up Git autocomplete.
 __git_files () {
@@ -44,7 +60,9 @@ fi
 
 # Paths
 export PATH=/usr/local/opt/ruby/bin:$PATH
+export PATH=~/.config/emacs/bin:$PATH
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
+export PATH=$PATH:/usr/local/opt/python@3.9/libexec/bin
 export PATH=$PATH:/usr/local/opt/php55/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
 export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
@@ -61,3 +79,13 @@ alias e="emacsclient -t"
 alias ltx="latexmk -pdf -pvc"
 alias xltx="latexmk -pdf -pvc -e '\$pdflatex=q/xelatex %O %S/'"
 alias sudo='sudo '
+source /usr/local/opt/chruby/share/chruby/auto.sh
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
+chruby ruby-3.1.2
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/finbarrtimbers/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/finbarrtimbers/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/finbarrtimbers/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/finbarrtimbers/google-cloud-sdk/completion.zsh.inc'; fi
