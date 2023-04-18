@@ -1,3 +1,5 @@
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 (require 'package)
 ; list the packages you want
 (setq package-list '(auto-complete))
