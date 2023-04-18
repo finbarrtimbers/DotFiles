@@ -1,5 +1,7 @@
 *.elc
 *.el~
 elpa/*
+auto-save-list/*
+elpa/*
 scripts/node_modules/
 scripts/node_modules/*
