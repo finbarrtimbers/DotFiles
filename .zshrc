@@ -1,91 +1,92 @@
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Needed to get zsh working.
+FPATH=/home/ftimbers_midjourney_com/.oh-my-zsh/functions:/home/ftimbers_midjourney_com/.oh-my-zsh/completions:/home/ftimbers_midjourney_com/.oh-my-zsh/cache/completions:/home/ftimbers_midjourney_com/.oh-my-zsh/functions:/home/ftimbers_midjournOBey_com/.oh-my-zsh/completions:/home/ftimbers_midjourney_com/.oh-my-zsh/cache/completions:$HOME/share/zsh/5.9/functions
+export FPATH
+
+# Paths
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
 # Improves startup time
 skip_global_compinit=1
+
 # Set name of the theme to load.
 ZSH_THEME="minimalist"
-source $ZSH/oh-my-zsh.sh
-# Start new tmux session if one doesn't already exist
-if [[ "$TMUX" == "" ]]; then
-   tmux new-session
-fi
-# zsh-plugins
-plugins=( zsh-syntax-highlighting)
-
-autoload -U zmv
-autoload -U compinit && compinit
 
 # Autocomplete settings.
 zstyle ':completion:*' users root $USER
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
-resize() {
-    # $1 is the filename
-    # $2 is the size, as a percent
-    filename=$1
-    basename=${filename%.png}
-    newname=$basename-full.png
-    if ! [ -f $newname ]; then
-	cp $1 $newname
-    fi
-    #convert $newname -adaptive-resize "$2"% -normalize -density 180 $1
-    #convert $newname -adaptive-resize "$2"% -normalize -unsharp 0.25x0.25+8+0.065 -density 600 $1
-    echo "convert $newname -resize "$2"% -quality 100 $1"
-    convert $newname -quality 100 -resize "$2"% $1
-}
+autoload -U compinit && compinit
 
-# Speeds up Git autocomplete.
-__git_files () {
-    _wanted files expl 'local files' _files
-}
 
 # load personal settings
 # Add colors
-export TERM=xterm-256color
-export EDITOR="mg"
+export TERM=xterm
+export EDITOR="emacsclient"
 
-# Use the "Z" script:
-. ~/Repos/.Files/z.sh
+# Load oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+
+# Force the emacs server to start if not running
+export ALTERNATE_EDITOR=""
+alias e="emacsclient --tty"
 
 # Increase history size
 export HISTFILESIZE=1000
 export HISTSIZE=1000
 
-# start tmux if not running
-if [ "$TMUX" = "" ];
-then tmux;
-fi
-
-# Paths
-export PATH=/usr/local/opt/ruby/bin:$PATH
-export PATH=~/.config/emacs/bin:$PATH
-export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
-export PATH=$PATH:/usr/local/opt/python@3.9/libexec/bin
-export PATH=$PATH:/usr/local/opt/php55/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
-export PATH=/usr/local/sbin:/usr/local/bin:$PATH
-export PATH=$HOME/.cabal/bin:$PATH
-export PATH=/usr/local/go/bin:$PATH
-export GOPATH=/usr/local/go/
-export PATH=$JAVA_HOME/bin:$PATH
+# Make absl fail fast:
+export TESTBRIDGE_TEST_RUNNER_FAIL_FAST=1
 
 # get a weird error without this
 unset GREP_OPTIONS
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 
-# System Aliases
-alias e="emacsclient -t"
-alias ltx="latexmk -pdf -pvc"
-alias xltx="latexmk -pdf -pvc -e '\$pdflatex=q/xelatex %O %S/'"
-alias sudo='sudo '
-source /usr/local/opt/chruby/share/chruby/auto.sh
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.1.2
+# Start new tmux session if one doesn't already exist
+if [[ "$TMUX" == "" ]]; then
+  tmux new-session $HOME/bin/zsh
+fi
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/finbarrtimbers/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/finbarrtimbers/google-cloud-sdk/path.zsh.inc'; fi
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/app/miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/app/miniconda/etc/profile.d/conda.sh" ]; then
+        . "/app/miniconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/app/miniconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/finbarrtimbers/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/finbarrtimbers/google-cloud-sdk/completion.zsh.inc'; fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
+
+
+source ~/Repos/grind/grind
+PATH=$HOME/Repos/grind:$PATH
+
