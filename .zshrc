@@ -1,3 +1,4 @@
+zmodload zsh/zprof
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -7,6 +8,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # Needed to get zsh working.
 FPATH=/home/ftimbers_midjourney_com/.oh-my-zsh/functions:/home/ftimbers_midjourney_com/.oh-my-zsh/completions:/home/ftimbers_midjourney_com/.oh-my-zsh/cache/completions:/home/ftimbers_midjourney_com/.oh-my-zsh/functions:/home/ftimbers_midjournOBey_com/.oh-my-zsh/completions:/home/ftimbers_midjourney_com/.oh-my-zsh/cache/completions:$HOME/share/zsh/5.9/functions
 export FPATH
+
+# Disable wandb logging.
+export WANDB_SILENT="true"
 
 # Paths
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
@@ -83,10 +87,11 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
+alias nvm="nvm $@"
 
 
 source ~/Repos/grind/grind
 PATH=$HOME/Repos/grind:$PATH
-
+zprof
