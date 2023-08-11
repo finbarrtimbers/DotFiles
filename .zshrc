@@ -6,7 +6,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 
 # Needed to get zsh working.
-FPATH=/home/ftimbers_midjourney_com/.oh-my-zsh/functions:/home/ftimbers_midjourney_com/.oh-my-zsh/completions:/home/ftimbers_midjourney_com/.oh-my-zsh/cache/completions:/home/ftimbers_midjourney_com/.oh-my-zsh/functions:/home/ftimbers_midjournOBey_com/.oh-my-zsh/completions:/home/ftimbers_midjourney_com/.oh-my-zsh/cache/completions:$HOME/share/zsh/5.9/functions
+FPATH=/home/$USER/.oh-my-zsh/functions:/home/$USER/.oh-my-zsh/completions:/home/$USER/.oh-my-zsh/cache/completions:/home/$USER/.oh-my-zsh/functions:/home/ftimbers_midjournOBey_com/.oh-my-zsh/completions:/home/$USER/.oh-my-zsh/cache/completions:$HOME/share/zsh/5.9/functions
 export FPATH
 
 # Disable wandb logging.
@@ -91,7 +91,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 alias nvm="nvm $@"
 
-
-source ~/Repos/grind/grind
-PATH=$HOME/Repos/grind:$PATH
+if [ -f ~/Repos/grind/grind ]; then
+    source ~/Repos/grind/grind
+    PATH=$HOME/Repos/grind:$PATH
+fi
 zprof
