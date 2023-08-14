@@ -85,6 +85,8 @@ tab-indent."
 ;; custom keybindings
 (global-set-key (kbd "C-x C-g") 'goto-line)
 
+;; never ask if I want to follow a symlink to a vc file
+(setq vc-follow-symlinks t)
 
 ;; python settings
 (add-hook 'python-base-mode-hook 'flymake-mode)
