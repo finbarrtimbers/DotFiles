@@ -1,4 +1,4 @@
-zmodload zsh/zprof
+#zmodload zsh/zprof
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -6,7 +6,17 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 
 # Needed to get zsh working.
-FPATH=/home/$USER/.oh-my-zsh/functions:/home/$USER/.oh-my-zsh/completions:/home/$USER/.oh-my-zsh/cache/completions:/home/$USER/.oh-my-zsh/functions:/home/ftimbers_midjournOBey_com/.oh-my-zsh/completions:/home/$USER/.oh-my-zsh/cache/completions:$HOME/share/zsh/5.9/functions
+FPATH=/usr/share/zsh/functions:\
+/usr/share/zsh/functions/Completion:\
+/usr/share/zsh/functions/Misc:\
+/usr/share/zsh/functions:\
+/usr/share/zsh/site-functions:\
+/usr/share/zsh/5.8/functions:\
+/home/$USER/.oh-my-zsh/lib:\
+/home/$USER/.oh-my-zsh/functions:\
+/home/$USER/.oh-my-zsh/completions:\
+/home/$USER/.oh-my-zsh/cache/completions:\
+$HOME/share/zsh/5.9/functions:$FPATH
 export FPATH
 
 # Disable wandb logging.
@@ -46,7 +56,7 @@ autoload -U compinit && compinit
 # load personal settings
 # Add colors
 export TERM=xterm
-export EDITOR="emacsclient"
+export EDITOR="emacsclient27"
 
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -54,7 +64,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Force the emacs server to start if not running
 export ALTERNATE_EDITOR=""
-alias e="emacsclient --tty"
+alias e="emacsclient27 --tty"
 
 # Increase history size
 export HISTFILESIZE=1000
@@ -68,7 +78,7 @@ unset GREP_OPTIONS
 
 # Start new tmux session if one doesn't already exist
 if [[ "$TMUX" == "" ]]; then
-  tmux new-session $HOME/bin/zsh
+  tmux new-session 
 fi
 
 # >>> conda initialize >>>
@@ -95,4 +105,4 @@ if [ -f ~/Repos/grind/grind ]; then
     source ~/Repos/grind/grind
     PATH=$HOME/Repos/grind:$PATH
 fi
-zprof
+#zprof
