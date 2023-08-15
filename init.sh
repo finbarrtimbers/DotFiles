@@ -1,7 +1,6 @@
-#ln -s emacs-settings ~/.emacs.d/settings
-#sudo ln -s backup cpplint.py /usr/bin/
-#ln .brew .emacs .gitconfig .pylintrc .tmux.conf .zshrc ~/
-#ln minimalist.zsh-theme ~/.oh-my-zsh/themes/
-ln -s /mnt/disks/persist/.Files/.zshrc ~/.zshrc
-ln -s /mnt/disks/persist/.Files/.tmux.conf ~/.tmux.conf
-ln -s /mnt/disks/persist/.Files/.emacs ~/.emacs
+if [ "$(basename $(pwd))" != ".Files" ]; then
+    echo "Please run this script from the .Files directory."
+    exit 1
+fi
+ln -s $(pwd)/{.zshrc,.tmux.conf,.emacs,emacs.d} ~/
+cp $(pwd)/minimalist.zsh-theme ~/.oh-my-zsh/themes/
