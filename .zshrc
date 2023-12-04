@@ -56,7 +56,7 @@ autoload -U compinit && compinit
 # load personal settings
 # Add colors
 export TERM=xterm
-export EDITOR="emacsclient27"
+export EDITOR="emacsclient"
 
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -64,7 +64,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Force the emacs server to start if not running
 export ALTERNATE_EDITOR=""
-alias e="emacsclient27 --tty"
+alias e="emacsclient --tty"
 
 # Increase history size
 export HISTFILESIZE=1000
