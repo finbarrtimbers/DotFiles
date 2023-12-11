@@ -5,6 +5,9 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Edmonton has the right time zone.
+TZ='America/Edmonton'; export TZ
+
 # Needed to get zsh working.
 FPATH=/usr/share/zsh/functions:\
 /usr/share/zsh/functions/Completion:\
