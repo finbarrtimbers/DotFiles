@@ -14,6 +14,9 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 
+(require 'ws-butler)
+(add-hook 'prog-mode-hook #'ws-butler-mode)
+
 ; activate all the packages (in particular autoloads)
 (package-initialize)
 
