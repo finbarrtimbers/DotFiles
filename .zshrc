@@ -1,6 +1,15 @@
 #zmodload zsh/zprof
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:~/.local/bin:$PATH
+if [ -d ~/k-diffusion-jax/commands ]; then
+    export PATH=~/k-diffusion-jax/commands:$PATH
+fi
+
+if [ -d "$HOME/.pyenv" ]; then
+	export PYENV_ROOT="$HOME/.pyenv"
+	export PATH="$PYENV_ROOT/bin:$PATH"
+	eval "$(pyenv init --path)"
+fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -59,7 +68,7 @@ autoload -U compinit && compinit
 # load personal settings
 # Add colors
 export TERM=xterm
-export EDITOR="emacsclient"
+export EDITOR="emacs"
 
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
