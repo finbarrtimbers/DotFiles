@@ -7,12 +7,20 @@
 (setq package-list '(
 		     ;; needed for Github Copilot
 		     s dash editorconfig use-package jsonrpc
+		       lsp-mode lsp-ui lsp-pyright
 		     ))
 
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
+
+;; works well for python
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
 
 (require 'ws-butler)
 (add-hook 'prog-mode-hook #'ws-butler-mode)
@@ -110,3 +118,4 @@ tab-indent."
  ;; If there is more than one, they won't work right.
  )
 (put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
