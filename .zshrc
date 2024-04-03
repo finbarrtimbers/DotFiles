@@ -1,8 +1,8 @@
 #zmodload zsh/zprof
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:~/.local/bin:$PATH
-if [ -d ~/k-diffusion-jax/commands ]; then
-    export PATH=~/k-diffusion-jax/commands:$PATH
+if [ -d ~/Repos/k-diffusion-jax2/commands ]; then
+    export PATH=~/Repos/k-diffusion-jax2/commands:$PATH
 fi
 
 if [ -d "$HOME/.pyenv" ]; then
@@ -11,8 +11,14 @@ if [ -d "$HOME/.pyenv" ]; then
 	eval "$(pyenv init --path)"
 fi
 
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+# Required to forward the ssh agent.
+alias mosh --ssh="ssh -A"
+eval "$(ssh-agent -s)" > /dev/null
+
 
 # Edmonton has the right time zone.
 TZ='America/Edmonton'; export TZ
