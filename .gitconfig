@@ -1,11 +1,7 @@
 [user]
-	name = Finbarr Timbers
-	email = timbers@ualberta.ca
-[credential]
-	helper = osxkeychain
-[github]
-	user = timbers
-[alias]
-	up = "!git remote update -p; git merge --ff-only @{u}"
-[core]
-	editor = emacsclient -t -a=/\"/\"
+        email = finbarrtimbers@gmail.com
+        name = Finbarr Timbers
+[pull]
+        rebase = true
+[url "git@github.com:"]
+        insteadOf = https://github.com/

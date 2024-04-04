@@ -5,17 +5,17 @@ if [ "$(basename $(pwd))" != ".Files" ]; then
 fi
 
 # Install all the base packages we need:
-sudo apt-get update && sudo apt-get install -y git zsh nodejs emacs tmux elpa-ws-butler
+sudo apt-get update && sudo apt-get install -y git zsh nodejs npm emacs tmux elpa-ws-butler
 
 # Install oh-my-zsh
-if [[ $SHELL =~ "zsh" ]]; then
+if [[ $SHELL =~ "zsh" && ! -d ~/.oh-my-zsh]]; then
    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
    
 # We don't need the current .zshrc, as it's just the default.
-rm ~/.zshrc
+rm -f ~/.zshrc
 
-for file in ".zshrc" ".tmux.conf" ".emacs"; do
+for file in ".zshrc" ".tmux.conf" ".emacs" ".gitconfig"; do
     ln -f $(pwd)/$file ~/
 done
 ln -f $(pwd)/minimalist.zsh-theme ~/.oh-my-zsh/themes/
