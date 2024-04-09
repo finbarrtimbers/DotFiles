@@ -17,7 +17,9 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # Required to forward the ssh agent.
 alias mosh --ssh="ssh -A"
-eval "$(ssh-agent -s)" > /dev/null
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+	eval $(`ssh-agent -s`) > /dev/null
+fi
 
 
 # Edmonton has the right time zone.
