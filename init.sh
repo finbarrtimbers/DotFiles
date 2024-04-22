@@ -8,7 +8,7 @@ fi
 sudo apt-get update && sudo apt-get install -y git zsh nodejs npm emacs tmux elpa-ws-butler
 
 # Install oh-my-zsh
-if [[ $SHELL =~ "zsh" && ! -d ~/.oh-my-zsh]]; then
+if [[ ! -d ~/.oh-my-zsh ]]; then
    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
    
