@@ -33,13 +33,6 @@ prompt_pure_preexec() {
     cmd_timestamp=$EPOCHSECONDS
 }
 
-prompt_info() {
-    if [[ ( $(whence in_svn) != "" ) && ( $(in_svn) == 1 ) ]]; then
-        svn_prompt_info
-    else
-        git_prompt_info
-    fi
-}
 
 
 prompt_pure_precmd() {
@@ -52,9 +45,9 @@ prompt_setup() {
     autoload -Uz add-zsh-hook
     autoload -Uz vcs_info
 
-    add-zsh-hook precmd prompt_pure_precmd
     add-zsh-hook preexec prompt_pure_preexec
-    PROMPT='$(prompt_info) %{%(?.%F{green}.%F{red})%G❯%f%} '
+    PROMPT='$(git_prompt_info) %{%(?.%F{green}.%F{red})%G❯%f%} '
+    precmd_functions+=(vcs_info)  # Add vcs_info to precmd_functions to update it each time the prompt is displayed
 }
 
 prompt_setup
