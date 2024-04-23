@@ -46,7 +46,7 @@ prompt_setup() {
     autoload -Uz vcs_info
 
     add-zsh-hook preexec prompt_pure_preexec
-    PROMPT='$(git_prompt_info) %{%(?.%F{green}.%F{red})%G❯%f%} '
+    PROMPT='$(git_prompt_info) %1d %{%(?.%F{green}.%F{red})%G❯%f%} '
     precmd_functions+=(vcs_info)  # Add vcs_info to precmd_functions to update it each time the prompt is displayed
 }
 
