@@ -22,8 +22,14 @@
                           (require 'lsp-pyright)
                           (lsp))))  ; or lsp-deferred
 
-(require 'ws-butler)
-(add-hook 'prog-mode-hook #'ws-butler-mode)
+(use-package reformatter
+  :hook 
+  (python-mode . ruff-format-on-save-mode)
+  (python-ts-mode . ruff-format-on-save-mode)
+  :config
+  (reformatter-define ruff-format
+    :program "ruff"
+    :args `("format" "--stdin-filename" ,buffer-file-name "-")))
 
 ; activate all the packages (in particular autoloads)
 (package-initialize)
@@ -52,12 +58,13 @@
   (load bootstrap-file nil 'nomessage))
 
 
+;; I don't have a copilot sub, so I"m disabling this.
 ;; load Github Copilot:
-(use-package copilot
-  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-  :ensure t)
+;;(use-package copilot
+;;  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+;;  :ensure t)
 
-(add-hook 'prog-mode-hook 'copilot-mode)
+;;(add-hook 'prog-mode-hook 'copilot-mode)
 
 
 (defun rk/copilot-complete-or-accept ()
@@ -71,7 +78,7 @@ is available. Useful if you tend to hammer your keys like I do."
         (next-line))
     (copilot-complete)))
 
-(define-key global-map (kbd "M-C-<return>") #'rk/copilot-complete-or-accept)
+;;(define-key global-map (kbd "M-C-<return>") #'rk/copilot-complete-or-accept)
 
 (defun rk/copilot-tab ()
   "Tab command that will complete with copilot if a completion is
@@ -81,7 +88,7 @@ tab-indent."
   (or (copilot-accept-completion)
       (indent-for-tab-command)))
 
-(define-key global-map (kbd "TAB") #'rk/copilot-tab)
+;;(define-key global-map (kbd "TAB") #'rk/copilot-tab)
 
 ;; disable the menu bar
 (menu-bar-mode -1)
