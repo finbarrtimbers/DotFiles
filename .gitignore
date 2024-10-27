@@ -1,6 +1,7 @@
 *.elc
 *.el~
-elpa/*
+emacs.d/elpa/
+emacs.d/straight/
 auto-save-list/*
 elpa/*
 scripts/node_modules/

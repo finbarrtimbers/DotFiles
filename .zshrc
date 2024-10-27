@@ -1,26 +1,9 @@
-#zmodload zsh/zprof
+zmodload zsh/zprof
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:~/.local/bin:$PATH
-if [ -d ~/Repos/k-diffusion-jax2/commands ]; then
-    export PATH=~/Repos/k-diffusion-jax2/commands:$PATH
-fi
-
-if [ -d "$HOME/.pyenv" ]; then
-	export PYENV_ROOT="$HOME/.pyenv"
-	export PATH="$PYENV_ROOT/bin:$PATH"
-	eval "$(pyenv init --path)"
-fi
-
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
-# Required to forward the ssh agent.
-alias mosh --ssh="ssh -A"
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-	eval $(`ssh-agent -s`) > /dev/null
-fi
-
 
 # Edmonton has the right time zone.
 TZ='America/Edmonton'; export TZ
@@ -70,8 +53,16 @@ zstyle ':completion:*' users root $USER
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
-autoload -U compinit && compinit
-
+autoload -Uz compinit
+if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+  compinit
+else
+  compinit -C
+fi
+# Add to .zshrc
+if [ -f ~/.zcompdump ]; then
+  zrecompile -p ~/.zcompdump
+fi
 
 # load personal settings
 # Add colors
@@ -79,10 +70,11 @@ export TERM=xterm
 export EDITOR="emacs"
 
 # Load oh-my-zsh
+DISABLE_AUTO_UPDATE=true
 source $ZSH/oh-my-zsh.sh
 
 
-# Force the emacs server to start if not running
+# # Force the emacs server to start if not running
 export ALTERNATE_EDITOR=""
 alias e="emacsclient --tty"
 
@@ -100,29 +92,4 @@ unset GREP_OPTIONS
 if [[ "$TMUX" == "" ]]; then
   tmux new-session 
 fi
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/app/miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/app/miniconda/etc/profile.d/conda.sh" ]; then
-        . "/app/miniconda/etc/profile.d/conda.sh"
-    else
-        export PATH="/app/miniconda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-alias nvm="nvm $@"
-
-if [ -f ~/Repos/grind/grind ]; then
-    source ~/Repos/grind/grind
-    PATH=$HOME/Repos/grind:$PATH
-fi
-#zprof
+zprof
