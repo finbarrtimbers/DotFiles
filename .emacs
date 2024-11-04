@@ -1,49 +1,7 @@
+;; Initialize package system
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
-;; needed for package management
-(require 'package)
-
-; list the packages you want
-(setq package-list '(
-		     ;; needed for Github Copilot
-		     s dash editorconfig use-package jsonrpc
-		       lsp-mode lsp-ui lsp-pyright
-		     ))
-
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-
-;; works well for python
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ; or lsp-deferred
-
-(use-package reformatter
-  :hook 
-  (python-mode . ruff-format-on-save-mode)
-  (python-ts-mode . ruff-format-on-save-mode)
-  :config
-  (reformatter-define ruff-format
-    :program "ruff"
-    :args `("format" "--stdin-filename" ,buffer-file-name "-")))
-
-; activate all the packages (in particular autoloads)
-(package-initialize)
-
-; fetch the list of packages available 
-(unless package-archive-contents
-  (package-refresh-contents))
-
-; install the missing packages
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
-
-;; new package manager (straight.el) bootstrap:
+;; Bootstrap straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -57,72 +15,65 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;; Configure use-package to use straight.el by default
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
-;; I don't have a copilot sub, so I"m disabling this.
-;; load Github Copilot:
-;;(use-package copilot
-;;  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-;;  :ensure t)
+;; Core packages
+(use-package s :straight t)
+(use-package dash :straight t)
+(use-package editorconfig :straight t)
+(use-package jsonrpc :straight t)
 
-;;(add-hook 'prog-mode-hook 'copilot-mode)
+;; Python development environment
+(use-package lsp-mode
+  :straight t
+  :commands lsp)
 
+(use-package lsp-ui
+  :straight t
+  :commands lsp-ui-mode)
 
-(defun rk/copilot-complete-or-accept ()
-  "Command that either triggers a completion or accepts one if one
-is available. Useful if you tend to hammer your keys like I do."
-  (interactive)
-  (if (copilot--overlay-visible)
-      (progn
-        (copilot-accept-completion)
-        (open-line 1)
-        (next-line))
-    (copilot-complete)))
+(use-package lsp-pyright
+  :straight t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp-deferred))))
 
-;;(define-key global-map (kbd "M-C-<return>") #'rk/copilot-complete-or-accept)
+(use-package reformatter
+  :straight t
+  :hook 
+  (python-mode . ruff-format-on-save-mode)
+  (python-ts-mode . ruff-format-on-save-mode)
+  :config
+  (reformatter-define ruff-format
+    :program "ruff"
+    :args `("format" "--stdin-filename" ,buffer-file-name "-")))
 
-(defun rk/copilot-tab ()
-  "Tab command that will complete with copilot if a completion is
-available. Otherwise will try company, yasnippet or normal
-tab-indent."
-  (interactive)
-  (or (copilot-accept-completion)
-      (indent-for-tab-command)))
+;; Python specific settings
+(use-package python
+  :custom
+  (python-flymake-command '("ruff" "--quiet" "--stdin-filename=stdin" "-"))
+  :hook
+  (python-base-mode . flymake-mode))
 
-;;(define-key global-map (kbd "TAB") #'rk/copilot-tab)
-
-;; disable the menu bar
+;; UI Preferences
 (menu-bar-mode -1)
-
-;; show the column number
 (setq column-number-mode t)
-
-;; Enable incremental minibuffer completion.
 (icomplete-mode 1)
 (setq completion-show-help nil)
 
-;; custom keybindings
-(global-set-key (kbd "C-x C-g") 'goto-line)
-
-;; never ask if I want to follow a symlink to a vc file
+;; Version Control settings
 (setq vc-follow-symlinks t)
 
-;; python settings
-(add-hook 'python-base-mode-hook 'flymake-mode)
-(setq python-flymake-command '("ruff" "--quiet" "--stdin-filename=stdin" "-"))
-      
-(add-hook 'python-mode-hook 'lsp)
+;; Custom keybindings
+(global-set-key (kbd "C-x C-g") 'goto-line)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (dash s format-all auto-complete markdown-mode))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; Enable region case commands
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+
+;; Keep custom settings in a separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
