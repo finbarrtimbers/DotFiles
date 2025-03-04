@@ -69,7 +69,7 @@ is available. Useful if you tend to hammer your keys like I do."
         (open-line 1)
         (next-line))
     (copilot-complete)))
-;;(define-key global-map (kbd "M-C-<return>") #'rk/copilot-complete-or-accept)
+(define-key global-map (kbd "M-C-<return>") #'rk/copilot-complete-or-accept)
 (defun rk/copilot-tab ()
   "Tab command that will complete with copilot if a completion is
 available. Otherwise will try company, yasnippet or normal
@@ -77,7 +77,15 @@ tab-indent."
   (interactive)
   (or (copilot-accept-completion)
       (indent-for-tab-command)))
-;;(define-key global-map (kbd "TAB") #'rk/copilot-tab)
+(with-eval-after-load 'copilot
+  (define-key copilot-mode-map (kbd "TAB") #'rk/copilot-tab)
+  ;; Or use C-TAB as an alternative that won't conflict as much
+  (define-key copilot-mode-map (kbd "C-<tab>") #'copilot-accept-completion))
+
+;; Set a default indentation offset for Copilot
+(setq-default copilot-indent-offset 4)  ;; Use whatever value matches your preferred indentation
+
+
 ;; disable the menu bar
 (menu-bar-mode -1)
 ;; show the column number
