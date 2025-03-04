@@ -10,7 +10,7 @@
 (setq package-list '(
 		     ;; needed for Github Copilot
 		     s dash editorconfig use-package jsonrpc
-		       lsp-mode lsp-ui lsp-pyright
+		       lsp-mode lsp-ui lsp-pyright reformatter
 		     ))
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
@@ -52,12 +52,13 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
-;; I don't have a copilot sub, so I"m disabling this.
+
 ;; load Github Copilot:
-;;(use-package copilot
-;;  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-;;  :ensure t)
-;;(add-hook 'prog-mode-hook 'copilot-mode)
+(use-package copilot
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
+  :ensure t)
+
+(add-hook 'prog-mode-hook 'copilot-mode)
 (defun rk/copilot-complete-or-accept ()
   "Command that either triggers a completion or accepts one if one
 is available. Useful if you tend to hammer your keys like I do."
