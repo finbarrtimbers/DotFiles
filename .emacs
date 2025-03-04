@@ -147,8 +147,12 @@ Otherwise will try company, yasnippet or normal tab-indent."
 
 ;; UI settings
 (menu-bar-mode -1)
-(tool-bar-mode -1)  ;; Also disable toolbar for cleaner look
-(scroll-bar-mode -1) ;; And scrollbar
+;; Only use GUI elements if they're available
+(when (display-graphic-p)
+  (when (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
+  (when (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1)))
 (setq column-number-mode t)
 (icomplete-mode 1)
 (setq completion-show-help nil)
