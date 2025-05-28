@@ -29,11 +29,7 @@ zstyle ':completion:*' users root $USER
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 autoload -Uz compinit
-if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
-  compinit
-else
-  compinit -C
-fi
+compinit -C
 
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -42,9 +38,9 @@ source $ZSH/oh-my-zsh.sh
 alias e="emacsclient --tty"
 unset GREP_OPTIONS
 
-# Tmux check (only in interactive shells)
-if [[ $- == *i* ]] && [[ -z "$TMUX" ]]; then
-  tmux new-session
+# --- auto-tmux if available ---
+if [[ $- == *i* ]] && [[ -z $TMUX ]] && command -v tmux >/dev/null; then
+  tmux new
 fi
 
 # The next line updates PATH for the Google Cloud SDK.
