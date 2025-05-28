@@ -11,6 +11,10 @@ export HISTFILESIZE=1000
 export HISTSIZE=1000
 export TESTBRIDGE_TEST_RUNNER_FAIL_FAST=1
 
+# ~/.zshrc  (or ~/.bash_profile, etc.)
+export LANG=en_CA.UTF-8
+export LC_CTYPE=$LANG
+
 # Oh-My-Zsh settings
 DISABLE_AUTO_TITLE="true"
 DISABLE_MAGIC_FUNCTIONS="true"
@@ -42,3 +46,9 @@ unset GREP_OPTIONS
 if [[ $- == *i* ]] && [[ -z "$TMUX" ]]; then
   tmux new-session
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/finbarrtimbers/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/finbarrtimbers/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/finbarrtimbers/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/finbarrtimbers/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

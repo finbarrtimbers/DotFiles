@@ -1,6 +1,18 @@
+;; Suppress user-emacs-directory warning
+(setq user-emacs-directory-warning nil)
+
 ;; Performance optimizations
 (setq gc-cons-threshold 100000000)  ;; Increase garbage collection threshold
 (setq read-process-output-max (* 1024 1024)) ;; 1mb - helps with LSP performance
+
+;; Make every interface talk UTF-8, kills the char-or-string-p 134217826 error
+(set-language-environment "UTF-8")
+(setq locale-coding-system         'utf-8
+      selection-coding-system      'utf-8
+      keyboard-coding-system       'utf-8)
+(when (not (display-graphic-p))    ; needed only for tty Emacs
+  (set-terminal-coding-system 'utf-8))
+(prefer-coding-system 'utf-8)
 
 ;; Display and rendering fixes
 (setq-default bidi-paragraph-direction 'left-to-right)
