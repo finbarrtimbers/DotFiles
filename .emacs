@@ -1,5 +1,6 @@
 ;; Suppress user-emacs-directory warning
 (setq user-emacs-directory-warning nil)
+(setq vc-follow-symlinks t)
 
 ;; Performance optimizations
 (setq gc-cons-threshold 100000000)  ;; Increase garbage collection threshold

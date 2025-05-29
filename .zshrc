@@ -1,5 +1,4 @@
 # Basic environment setup
-export PATH=$HOME/bin:/usr/local/bin:~/.local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 export TZ='America/Edmonton'
 export TERM=xterm
@@ -38,9 +37,27 @@ source $ZSH/oh-my-zsh.sh
 alias e="emacsclient --tty"
 unset GREP_OPTIONS
 
-# --- auto-tmux if available ---
-if [[ $- == *i* ]] && [[ -z $TMUX ]] && command -v tmux >/dev/null; then
-  tmux new
+# --- detect whether we’re inside VS Code / Cursor ----------------------------
+# Any env-var that starts with “VSCODE_” means we’re in the integrated terminal
+if env | grep -q '^VSCODE_'; then
+  export IS_VSCODE=true
+else
+  export IS_VSCODE=false
+fi
+
+# If we're not in VSCode, add standard /usr/local/bin to the path:
+if [[ $IS_VSCODE == false ]]; then
+ 	export PATH=$HOME/bin:/usr/local/bin:~/.local/bin:$PATH
+fi
+
+# --- auto-tmux only when it makes sense -------------------------------------
+#  * interactive shell (`$-` contains i)
+#  * not already inside tmux
+#  * tmux is installed
+#  * **NOT** running under VS Code / Cursor
+if [[ $- == *i* ]] && [[ -z $TMUX ]] && [[ $IS_VSCODE == false ]] \
+   && command -v tmux >/dev/null; then
+  tmux new        # or: exec tmux new-session -A -s main
 fi
 
 # The next line updates PATH for the Google Cloud SDK.
