@@ -6,3 +6,4 @@ auto-save-list/*
 elpa/*
 scripts/node_modules/
 scripts/node_modules/*
+claude/todos/*

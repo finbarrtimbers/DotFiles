@@ -7,3 +7,5 @@
         insteadOf = https://github.com/
 [advice]
 	addIgnoredFile = false
+[push]
+	autoSetupRemote = true

@@ -34,11 +34,12 @@ create_symlink() {
 
 REPO_PATH="$HOME/Repos/DotFiles"
 
-# Example configurations - modify these according to your needs
 CONFIGS=(
     ".zshrc:$REPO_PATH/.zshrc"
     ".emacs:$REPO_PATH/.emacs"
     ".emacs.d:$REPO_PATH/emacs.d"
+    "CLAUDE.md:$REPO_PATH/.claude/CLAUDE.md"
+    "claude_settings.json:$REPO_PATH/.claude/claude_settings.json"
     ".tmux.conf:$REPO_PATH/.tmux.conf"
     ".gitconfig:$REPO_PATH/.gitconfig"
     ".oh-my-zsh/themes/minimalist.zsh-theme:$REPO_PATH/minimalist.zsh-theme"

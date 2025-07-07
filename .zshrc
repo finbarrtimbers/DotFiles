@@ -9,6 +9,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 export HISTFILESIZE=1000
 export HISTSIZE=1000
 export TESTBRIDGE_TEST_RUNNER_FAIL_FAST=1
+export GOPATH=$HOME/go
 
 # ~/.zshrc  (or ~/.bash_profile, etc.)
 export LANG=en_CA.UTF-8
@@ -37,8 +38,8 @@ source $ZSH/oh-my-zsh.sh
 alias e="emacsclient --tty"
 unset GREP_OPTIONS
 
-# --- detect whether we’re inside VS Code / Cursor ----------------------------
-# Any env-var that starts with “VSCODE_” means we’re in the integrated terminal
+# --- detect whether we're inside VS Code / Cursor ----------------------------
+# Any env-var that starts with "VSCODE_" means we're in the integrated terminal
 if env | grep -q '^VSCODE_'; then
   export IS_VSCODE=true
 else
@@ -47,7 +48,7 @@ fi
 
 # If we're not in VSCode, add standard /usr/local/bin to the path:
 if [[ $IS_VSCODE == false ]]; then
- 	export PATH=$HOME/bin:/usr/local/bin:~/.local/bin:$PATH
+ 	export PATH=$HOME/bin:/usr/local/bin:~/.local/bin:$GOPATH/bin:$PATH
 fi
 
 # --- auto-tmux only when it makes sense -------------------------------------
@@ -60,8 +61,26 @@ if [[ $- == *i* ]] && [[ -z $TMUX ]] && [[ $IS_VSCODE == false ]] \
   tmux new        # or: exec tmux new-session -A -s main
 fi
 
+function beaker_logs() {
+    local experiment_id=$1
+    local job_id=$(beaker experiment inspect $experiment_id --format=json | jq -r '.[0].jobs[0].id')
+    beaker job logs $job_id
+}
+
+# Commit + push in one step
+gp() {
+  local msg="$*"          # all arguments as one string, preserving spaces
+  if [[ -z $msg ]]; then
+    echo "Usage: gp <commit-message>"
+    return 1
+  fi
+  git commit -am "$msg" && git push
+}
+
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/finbarrtimbers/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/finbarrtimbers/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/finbarrtimbers/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/finbarrtimbers/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH=/opt/homebrew/anaconda3/bin:$PATH

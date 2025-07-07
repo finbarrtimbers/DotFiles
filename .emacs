@@ -88,6 +88,7 @@
   (lsp-keep-workspace-alive nil)
   (lsp-enable-symbol-highlighting nil)
   (lsp-enable-links nil)
+  (setq lsp-file-watch-threshold 20000)
   (lsp-signature-auto-activate nil))
 
 ;; Configure LSP UI for minimal interference with Copilot
