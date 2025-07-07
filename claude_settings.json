@@ -5,8 +5,8 @@
 		"Bash(git:*)",
 		"Bash(chmod +x:*)",
         "Read(~/.zshrc)",
-		"Bash(rg*)",
-		"Bash(uv run pytest*)",
+		"Bash(rg:*)",
+		"Bash(uv run pytest:*)",
     ],
   },
 }
