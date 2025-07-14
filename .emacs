@@ -27,9 +27,45 @@
 (setq locale-coding-system     'utf-8
       selection-coding-system  'utf-8
       keyboard-coding-system   'utf-8)
+
+;; ==========  redisplay is king  ==========
+;; turn OFF *all* speed hacks that skip drawing
+(setq fast-but-imprecise-scrolling nil   ; Emacs 28+
+      auto-window-vscroll          nil   ; skip fractional‐line redraw
+      redisplay-dont-pause         nil   ; never abort a full refresh
+      jit-lock-defer-time          nil)  ; font-lock immediately
+
+;; pixel-precision scroll (Emacs 29) also shortcuts redisplay → kill it
+(when (fboundp 'pixel-scroll-precision-mode)
+  (pixel-scroll-precision-mode -1))
+
+;; so-long can mark huge lines invisible; keep it passive
+(setq so-long-enable nil)
+
+;; helper: force a full refresh after *any* scroll command
+(defun my/force-full-redisplay (&rest _)
+  (redisplay t))
+(dolist (fn '(scroll-up  scroll-down
+              scroll-up-command scroll-down-command
+              scroll-other-window scroll-other-window-down))
+  (advice-add fn :after #'my/force-full-redisplay))
+
+
+;; ---------------- core ----------------
+(setq user-emacs-directory-warning nil
+      vc-follow-symlinks t
+      gc-cons-threshold 100000000
+      read-process-output-max (* 1024 1024)     ; 1 MiB for LSP
+      fast-but-imprecise-scrolling nil          ; <--- FIX the disappearing text
+      auto-window-vscroll          nil)         ; stop half-line jitters too
+
+(set-language-environment "UTF-8")
+(setq locale-coding-system 'utf-8
+      selection-coding-system 'utf-8
+      keyboard-coding-system  'utf-8)
 (prefer-coding-system 'utf-8)
-(unless (display-graphic-p)
-  (set-terminal-coding-system 'utf-8))
+(unless (display-graphic-p) (set-terminal-coding-system 'utf-8))
+
 
 ;;; ---------------------------------------------------------------------------
 ;;;  Display
