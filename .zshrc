@@ -83,4 +83,8 @@ if [ -f '/Users/finbarrtimbers/Downloads/google-cloud-sdk/path.zsh.inc' ]; then 
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/finbarrtimbers/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/finbarrtimbers/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-export PATH=/opt/homebrew/anaconda3/bin:$PATH
+export PATH="$VIRTUAL_ENV/bin:/opt/homebrew/anaconda3/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
