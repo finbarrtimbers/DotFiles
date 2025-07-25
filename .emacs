@@ -219,4 +219,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; ---------------- Python flymake ----------------
+(add-hook 'python-base-mode-hook #'flymake-mode)
+(setq python-flymake-command '("ruff" "--quiet" "--stdin-filename=stdin" "-"))
+
+;; ---------------- TOML mode ----------------
+(add-hook 'toml-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq tab-width 2)))
+
+;; ---------------- GC back to normal ----------------
+(add-hook 'after-init-hook (lambda () (setq gc-cons-threshold 800000)))
 (put 'upcase-region 'disabled nil)
