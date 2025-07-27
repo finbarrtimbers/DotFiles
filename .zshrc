@@ -58,7 +58,8 @@ fi
 #  * **NOT** running under VS Code / Cursor
 if [[ $- == *i* ]] && [[ -z $TMUX ]] && [[ $IS_VSCODE == false ]] \
    && command -v tmux >/dev/null; then
-  tmux new        # or: exec tmux new-session -A -s main
+  # Create a new session each time (don't use -A flag)
+  tmux new-session
 fi
 
 function beaker_logs() {
