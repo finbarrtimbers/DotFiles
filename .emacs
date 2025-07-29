@@ -120,6 +120,9 @@
 ;;;  LSP stack
 ;;; ---------------------------------------------------------------------------
 
+;; Ensure markdown-mode is installed first (dependency for lsp packages)
+(use-package markdown-mode)
+
 (use-package lsp-mode
   :hook ((python-mode python-ts-mode) . lsp-deferred)
   :custom
