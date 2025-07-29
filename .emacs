@@ -230,6 +230,13 @@
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
 
+;; ---------------- YAML indentation ----------------
+(add-hook 'find-file-hook
+          (lambda ()
+            (when (string-match "\\.ya?ml\\'" buffer-file-name)
+              (setq indent-tabs-mode nil)
+              (setq tab-width 2))))
+
 ;; ---------------- GC back to normal ----------------
 (add-hook 'after-init-hook (lambda () (setq gc-cons-threshold 800000)))
 (put 'upcase-region 'disabled nil)
