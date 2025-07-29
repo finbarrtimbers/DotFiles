@@ -6,7 +6,7 @@
 		"Bash(chmod +x:*)",
         "Read(~/.zshrc)",
 		"Bash(rg:*)",
-		"Bash(uv run pytest:*)",
-    ],
-  },
+		"Bash(uv run pytest:*)"
+    ]
+  }
 }
