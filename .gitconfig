@@ -1,6 +1,7 @@
 [user]
         email = finbarrtimbers@gmail.com
         name = Finbarr Timbers
+	signingkey = /Users/finbarrtimbers/.ssh/id_ed25519.pub
 [pull]
         rebase = true
 [url "git@github.com:"]

@@ -46,9 +46,12 @@ else
   export IS_VSCODE=false
 fi
 
-# If we're not in VSCode, add standard /usr/local/bin to the path:
+# Always prioritize /usr/local/bin over /usr/bin
+export PATH=/usr/local/bin:$PATH
+
+# If we're not in VSCode, add additional paths:
 if [[ $IS_VSCODE == false ]]; then
- 	export PATH=$HOME/bin:/usr/local/bin:~/.local/bin:$GOPATH/bin:$PATH
+ 	export PATH=$HOME/bin:~/.local/bin:$GOPATH/bin:$PATH
 fi
 
 # --- auto-tmux only when it makes sense -------------------------------------
