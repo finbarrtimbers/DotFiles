@@ -17,3 +17,5 @@ If I ask you to reproduce a bug with a test, then you should write a test that f
 Please keep comments to a minimum, and only add comments when they are needed.
 
 Please only use try/except clauses when absolutely necessary. Prefer to not use them.
+
+Always try to use `uv run python` instead of `python ...` (same for `uv run pytest`).
