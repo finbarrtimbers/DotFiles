@@ -47,7 +47,7 @@ else
 fi
 
 # Always prioritize /usr/local/bin over /usr/bin
-export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/bin:$HOME/.local/bin:$PATH
 
 # If we're not in VSCode, add additional paths:
 if [[ $IS_VSCODE == false ]]; then
@@ -87,8 +87,9 @@ if [ -f '/Users/finbarrtimbers/Downloads/google-cloud-sdk/path.zsh.inc' ]; then 
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/finbarrtimbers/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/finbarrtimbers/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-export PATH="$VIRTUAL_ENV/bin:/opt/homebrew/anaconda3/bin:$PATH"
-
+if [[ -n "$VIRTUAL_ENV" ]]; then
+    export PATH="$VIRTUAL_ENV/bin:$PATH"
+fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
