@@ -206,6 +206,9 @@
 (global-set-key (kbd "C-x C-g") #'goto-line)
 (put 'downcase-region 'disabled nil)
 
+;; Remove trailing whitespace on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 (add-hook 'after-init-hook
           (lambda ()
             (setq gc-cons-threshold (* 8 1024 1024))))
