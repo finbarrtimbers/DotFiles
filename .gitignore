@@ -1,6 +1,8 @@
 *.elc
 *.el~
-emacs.d/projects/
+emacs.d/projects
+emacs.d/.cache/
+emacs.d/.lsp-session-v1
 emacs.d/eln-cache/
 emacs.d/auto-save-list/
 emacs.d/elpa/
