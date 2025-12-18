@@ -1,5 +1,8 @@
 *.elc
 *.el~
+emacs.d/projects/
+emacs.d/eln-cache/
+emacs.d/auto-save-list/
 emacs.d/elpa/
 emacs.d/straight/
 auto-save-list/*

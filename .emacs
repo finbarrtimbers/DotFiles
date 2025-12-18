@@ -17,7 +17,8 @@
       redisplay-dont-pause      t
       jit-lock-defer-time       0
       vc-follow-symlinks        t
-      warning-suppress-types    '((files user-emacs-directory)))
+      warning-suppress-types    '((files user-emacs-directory))
+      backup-directory-alist    '(("." . "~/.emacs.d/backups")))
 
 ;;; ---------------------------------------------------------------------------
 ;;;  UTF-8 everywhere
@@ -176,10 +177,12 @@
             :branch "main")
   :hook (prog-mode . copilot-mode)
   :custom
+
   (copilot-indent-offset 4)
   (copilot-idle-delay   0.2)
   :config
   (setq copilot-overlay-priority 100)
+  (setq copilot-max-char 500000) ;; or higher
   (advice-add 'copilot--display-overlay :before
               (lambda (&rest _)
                 (remove-overlays (point) (line-end-position) 'category 'copilot)))
