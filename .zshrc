@@ -81,6 +81,10 @@ gp() {
   git commit -am "$msg" && git push
 }
 
+pp() {
+    git pull && git push
+}
+
 if [[ -n "$VIRTUAL_ENV" ]]; then
     export PATH="$VIRTUAL_ENV/bin:$PATH"
 fi
@@ -93,3 +97,6 @@ if [ -f '/Users/finbarrtimbers/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/finbarrtimbers/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/finbarrtimbers/google-cloud-sdk/completion.zsh.inc'; fi
+
+# opencode
+export PATH=/Users/finbarrtimbers/.opencode/bin:$PATH

@@ -1,0 +1,1 @@
+launch scripts/train/debug/single_gpu_on_beaker.sh and scripts/train/debug/tool_grpo_fast.sh using the commands from the project level claude.md

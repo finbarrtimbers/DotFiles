@@ -12,3 +12,14 @@ elpa/*
 scripts/node_modules/
 scripts/node_modules/*
 claude/todos/*
+claude/debug/
+claude/file-history/
+claude/history.jsonl
+claude/plugins/
+claude/paste-cache/
+claude/statsig/
+claude/shell-snapshots/
+claude/stats-cache.json
+claude/projects/
+claude/plans/
+claude/*~

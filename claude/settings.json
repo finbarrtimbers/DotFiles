@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(awk:*)",
+      "Bash(aws s3 --endpoint url https://weka-aus.beaker.org:9000 ls:*)",
+      "Bash(beaker:*)",
+      "Bash(gh:*)",
+      "Bash(git:*)",
+      "Bash(uv run pytest)",
+      "Bash(curl:*)",
+      "Bash(docker:*)",
+      "Bash(beaker:*)",
+      "Fetch(https://raw.githubusercontent.com/:*)",
+      "Fetch(:*)",
+      "Fetch(https://github.com/:*)",
+      "Bash(git:*)",
+      "Bash(chmod +x:*)",
+      "Bash(shellcheck:*)",
+      "Read(~/.zshrc)",
+      "Bash(rg:*)",
+      "Bash(uv:*)",
+      "Bash(uv run ruff:*)",
+      "Bash(uv run pytest:*)",
+      "Bash(make:*)",
+      "Bash(shellcheck:*)"
+    ]
+  },
+  "alwaysThinkingEnabled": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754438630572
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo:*)",
+      "Bash(env)",
+      "Bash(beaker:*)",
+      "Bash(timeout 5 beaker session attach:*)",
+      "Skill(monitor-experiment)",
+      "Skill(run-and-fix)",
+      "Bash(du:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
