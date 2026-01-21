@@ -11,6 +11,7 @@ auto-save-list/*
 elpa/*
 scripts/node_modules/
 scripts/node_modules/*
+claude/cache/
 claude/todos/*
 claude/debug/
 claude/file-history/
