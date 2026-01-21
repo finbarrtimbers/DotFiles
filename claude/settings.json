@@ -14,6 +14,7 @@
       "Fetch(https://raw.githubusercontent.com/:*)",
       "Fetch(:*)",
       "Fetch(https://github.com/:*)",
+      "Bash(sed:*)",
       "Bash(git:*)",
       "Bash(chmod +x:*)",
       "Bash(shellcheck:*)",

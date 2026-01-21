@@ -100,3 +100,10 @@ if [ -f '/Users/finbarrtimbers/google-cloud-sdk/completion.zsh.inc' ]; then . '/
 
 # opencode
 export PATH=/Users/finbarrtimbers/.opencode/bin:$PATH
+
+# AI2 credentials
+if [ -f "$HOME/ai2-creds.sh" ]; then
+    . "$HOME/ai2-creds.sh"
+elif [ -f "$HOME/.ai2-creds" ]; then
+    . "$HOME/.ai2-creds"
+fi
