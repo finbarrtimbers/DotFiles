@@ -38,12 +38,14 @@ CONFIGS=(
     ".zshrc:$REPO_PATH/.zshrc"
     ".emacs:$REPO_PATH/.emacs"
     ".emacs.d:$REPO_PATH/emacs.d"
-    "CLAUDE.md:$REPO_PATH/.claude/CLAUDE.md"
-    "claude_settings.json:$REPO_PATH/.claude/claude_settings.json"
+    "CLAUDE.md:$REPO_PATH/CLAUDE.md"
     ".tmux.conf:$REPO_PATH/.tmux.conf"
     ".gitconfig:$REPO_PATH/.gitconfig"
     ".oh-my-zsh/themes/minimalist.zsh-theme:$REPO_PATH/minimalist.zsh-theme"
-    ".claude:$REPO_PATH/claude"
+    ".claude/settings.json:$REPO_PATH/claude/settings.json"
+    ".claude/commands:$REPO_PATH/claude/commands"
+    ".claude/skills:$REPO_PATH/claude/skills"
+    ".claude/agents:$REPO_PATH/claude/agents"
 )
 
 # Create symlinks for each config file
