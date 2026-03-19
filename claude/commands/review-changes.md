@@ -23,4 +23,7 @@ AI generated slop includes:
 - For variables that are only used a single time right after declaration, prefer inlining the rhs.
 - If any comments were removed, add them back, unless they're outdated from the changes.
 
+AI generated slop doesn't include:
+- Docstrings, particularly if they follow the Google Python style guide
+
 Report at the end with only a 1-3 sentence summary of what you changed.

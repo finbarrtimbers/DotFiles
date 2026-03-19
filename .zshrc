@@ -12,7 +12,7 @@ export TESTBRIDGE_TEST_RUNNER_FAIL_FAST=1
 export GOPATH=$HOME/go
 
 # ~/.zshrc  (or ~/.bash_profile, etc.)
-export LANG=en_CA.UTF-8
+export LANG=en_US.UTF-8
 export LC_CTYPE=$LANG
 
 # Oh-My-Zsh settings
@@ -107,3 +107,122 @@ if [ -f "$HOME/ai2-creds.sh" ]; then
 elif [ -f "$HOME/.ai2-creds" ]; then
     . "$HOME/.ai2-creds"
 fi
+# beaker-session
+#
+# Usage:
+#   beaker-session [OPTIONS]
+#
+# Options:
+#   -h, --help
+#       Print this help message and exit.
+#
+#   -c CLUSTER, --cluster CLUSTER, --cluster=CLUSTER
+#       Beaker cluster to use. Defaults to:
+#         ai2/hammond
+#
+#   -f, --force
+#       Force creation of a new session even if one already exists.
+#
+# Description:
+#   - Determines your Beaker username via `beaker account whoami`.
+#   - Reuses an existing Beaker session on the target cluster if one exists.
+#   - Otherwise creates a new detached remote bare session with:
+#       * multiple weka mounts
+#       * secret mounts
+#       * workdir /root
+#       * workspace ai2/open-instruct-dev
+#       * budget ai2/allennlp
+#       * --save-image
+#   - Resolves BEAKER_NODE_HOSTNAME for the session.
+#   - Uses mosh to connect to the node and attaches to the session.
+#
+# Requirements:
+#   - beaker CLI
+#   - jq
+#   - mosh (mosh-server must be present on the node)
+
+beaker-session() {
+  # Defaults
+  local cluster="ai2/hammond"
+  local force=0
+
+  # Parse flags
+  while (( $# > 0 )); do
+    case "$1" in
+      -h|--help)
+        echo "beaker-session [-h|--help] [-f|--force] [-c|--cluster CLUSTER|--cluster=CLUSTER]"
+        return 0
+        ;;
+      -f|--force)
+        force=1
+        shift
+        ;;
+      -c|--cluster)
+        [[ $# -ge 2 ]] || { echo "Error: --cluster requires an argument" >&2; return 1; }
+        cluster="$2"
+        shift 2
+        ;;
+      --cluster=*)
+        cluster="${1#*=}"
+        shift
+        ;;
+      --)
+        shift
+        break
+        ;;
+      -*)
+        echo "Error: Unknown option: $1" >&2
+        return 1
+        ;;
+      *)
+        echo "Error: beaker-session takes no positional arguments" >&2
+        return 1
+        ;;
+    esac
+  done
+
+  (( $# == 0 )) || { echo "Error: beaker-session takes no positional arguments" >&2; return 1; }
+
+  local author session node beaker_json
+
+  beaker_json="$(beaker account whoami --format=json)" || return $?
+  author="$(printf '%s' "$beaker_json" | jq -r '.[].name')" || return $?
+  [[ -n "$author" ]] || { echo "Error: Could not determine beaker author." >&2; return 1; }
+
+  # Look for an existing session
+  beaker_json="$(beaker session list --author="$author" --cluster="$cluster" --format=json)" || return $?
+  session="$(printf '%s' "$beaker_json" | jq -r '.[0].id // empty')" || return $?
+
+  if [[ -n "$session" && "$force" -eq 0 ]]; then
+    echo "Using existing session: $session"
+  else
+    beaker_json="$(
+      beaker session create --detach --bare \
+        --cluster "$cluster" \
+        --workspace "ai2/open-instruct-dev" \
+        --budget "ai2/allennlp" \
+        --mount src=weka,ref=oe-eval-default,subpath=finbarrt,dst=/root \
+        --mount src=weka,ref=oe-adapt-default,dst=/weka/oe-adapt-default \
+        --mount src=weka,ref=oe-training-default,dst=/weka/oe-training-default \
+        --workdir=/root \
+        --no-update-default-image=false \
+        --save-image \
+        --mount src=secret,ref=ssh-key,dst=/secret-files/.ssh/id_rsa \
+        --mount src=secret,ref=ai2-creds,dst=/secret-files/.ai2-creds \
+        --mount src=secret,ref=git-config,dst=/secret-files/.gitconfig \
+        --mount src=secret,ref=beaker-config,dst=/secret-files/.beaker/config.yml
+    )" || return $?
+    session="$(printf '%s' "$beaker_json" | sed -n 's/Starting session \([^ ]*\) .*/\1/p')" || return $?
+
+    [[ -n "$session" ]] || { echo "Error: Failed to create a new session." >&2; return 1; }
+    echo "Created new session: $session"
+  fi
+
+  beaker_json="$(beaker session get "$session" --format=json)" || return $?
+  node="$(printf '%s' "$beaker_json" | jq -r '.[].session.envVars[] | select(.name=="BEAKER_NODE_HOSTNAME") | .value')" || return $?
+
+  [[ -n "$node" ]] || { echo "Error: Could not determine node hostname for session $session" >&2; return 1; }
+
+  # Always use mosh (no fallback)
+  mosh "$author@$node" -- beaker session attach "$session"
+}

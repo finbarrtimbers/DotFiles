@@ -2,32 +2,56 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
     "allow": [
-      "Bash(awk:*)",
-      "Bash(aws s3 --endpoint url https://weka-aus.beaker.org:9000 ls:*)",
-      "Bash(beaker:*)",
-      "Bash(gh:*)",
-      "Bash(git:*)",
-      "Bash(uv run pytest)",
-      "Bash(curl:*)",
-      "Bash(docker:*)",
-      "Bash(beaker:*)",
-      "Fetch(https://raw.githubusercontent.com/:*)",
-      "Fetch(:*)",
-      "Fetch(https://github.com/:*)",
-      "Bash(sed:*)",
-      "Bash(git:*)",
-      "Bash(chmod +x:*)",
-      "Bash(shellcheck:*)",
-      "Read(~/.zshrc)",
-      "Bash(rg:*)",
-      "Bash(uv:*)",
-      "Bash(uv run ruff:*)",
-      "Bash(uv run pytest:*)",
-      "Bash(make:*)",
-      "Bash(shellcheck:*)"
+      "Bash(awk *)",
+      "Bash(aws s3 --endpoint url https://weka-aus.beaker.org:9000 ls *)",
+      "Bash(beaker *)",
+      "Bash(python3 *)",
+      "Bash(diff *)",
+      "Bash(find *)",
+      "Bash(gh *)",
+      "Bash(git *)",
+      "Bash(curl *)",
+      "Bash(docker *)",
+      "Bash(sed *)",
+      "Bash(chmod +x *)",
+      "Bash(shellcheck *)",
+      "Bash(rg *)",
+      "Bash(uv *)",
+      "Bash(pip *)",
+      "Bash(make *)",
+      "Bash(cat *)",
+      "Bash(ls *)",
+      "Bash(wc *)",
+      "Bash(ps *)",
+      "Bash(cp *)",
+      "Bash(mkdir *)",
+      "Bash(sleep *)",
+      "Bash(./scripts/ *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(jq *)",
+      "Read(*)",
+      "Fetch(*)",
+      "WebFetch(domain:*)",
+      "Agent"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"import sys,json,subprocess; d=json.load(sys.stdin); f=d.get('tool_input',{}).get('file_path',''); subprocess.run(['ruff','check','--quiet',f]) if f and f.endswith('.py') else None\""
+          }
+        ]
+      }
     ]
   },
   "alwaysThinkingEnabled": true,
+  "effortLevel": "medium",
+  "statusCommand": "~/.claude/statusline.sh",
   "feedbackSurveyState": {
     "lastShownTime": 1754438630572
   }
