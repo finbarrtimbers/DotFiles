@@ -7,8 +7,5 @@ emacs.d/eln-cache/
 emacs.d/auto-save-list/
 emacs.d/elpa/
 emacs.d/straight/
-auto-save-list/*
-elpa/*
 scripts/node_modules/
-scripts/node_modules/*
 claude/*~
