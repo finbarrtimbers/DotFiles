@@ -1,4 +1,6 @@
-Run each of the following scripts in order. Wait for each to finish, then start the next one. Monitor the results. If there any errors in a script, fix them, and relaunch to verify the fix is complete.
+Run each of the following scripts in order. Wait for each to **succeed** before launching the next. Monitor the results. If there are any errors in a script, fix them, and relaunch to verify the fix is complete.
+
+IMPORTANT: Run experiments sequentially, not in parallel. Only one experiment should be running at a time.
 
 1. @scripts/train/debug/single_gpu_on_beaker.sh
 2. @scripts/train/debug/tools/olmo_3_parser_multigpu.sh
